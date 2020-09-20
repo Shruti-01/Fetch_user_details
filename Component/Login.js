@@ -1,17 +1,14 @@
 import React,{Component} from 'react'
-import {View,Text, TextInput,StyleSheet} from 'react-native'
-import { TextButton} from 'react-native-material-buttons';
-
+import {View,Button, TextInput,StyleSheet} from 'react-native'
+import {createStackNavigator} from 'react-navigation-stack'
+import {createAppContainer} from 'react-navigation'
+import LoginContainer from './LoginContainer';
+import {Provider} from 'react-redux'
+import store from './store'
 
 class Login extends Component{
-    constructor(){
-        super()
-        this.state={
-            text:"",
-            disabled:true
-        }
-    }
-    _getUserData=async()=>{
+   
+    /*_getUserData=async()=>{
         fetch('https://api.nasa.gov/neo/rest/v1/neo/4771e6e5-9147-48e3-8dce-e0aaf6869380?api_key=J1jZpHxRlRvQi2o8tBpDT5RreoR8wkSyp6bn8Kab',{method:'GET'})
         .then(response=>{
             console.warn(response.data)
@@ -19,22 +16,28 @@ class Login extends Component{
         .catch(error=>{
             console.warn(error.message)
         })
-    }
+    } */
 
     render(){
         return(
-            <View style={styles.container}>
-                <Text style={styles.text}>Login From</Text>
+            <Provider store={store}>
+            <View >
+               {/* <Text style={styles.text}>Login From</Text>
                 <TextInput style={styles.input} placeholder="Enter Asteroid ID" 
                 onChangeText={(text)=>{this.setState({text:text,disabled:false})}}></TextInput>
                 <TextButton title="submit" style={styles.btn} disabled={this.state.disabled} onPress={()=>_getUserData()}/>
                 <TextButton title="Random Asteroid" style={styles.btn} />
-            </View>
+        */}
+             <Button title="move"  onPress={()=>this.props.navigation.navigate('info')} />
+     
+                <LoginContainer />
+                </View>
+                </Provider>
         )
     }
 }
 
-con
+
 const styles=StyleSheet.create({
     container:{
         flex:1,

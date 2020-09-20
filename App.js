@@ -8,19 +8,46 @@
 
 import React, { Component } from 'react';
 import {
-  StyleSheet,
+  Button,
   View,
- 
 } from 'react-native';
-import Login from './Component/Login'
-
+import LoginContainer from './Component/LoginContainer'
+import {Provider} from 'react-redux'
+import store from './Component/store'
+import {createStackNavigator} from 'react-navigation-stack'
+import UserDetails from './Component/userdetails'
+import {createAppContainer} from 'react-navigation'
+  
 class App extends Component{
+  static navigationOptions = {
+    title: 'User App',
+    headerStyle: {
+      backgroundColor: '#f4511e',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      alignSelf:"center"
+    },
+  };
   render(){
     return(
-      <View>
-        <Login />
-      </View>
+      <Provider store={store}>
+        <View>
+          <LoginContainer name ="shruti" navigation={this.props.navigation} />
+        </View>
+      </Provider>
     )
   }
 }
-export default App;
+
+const screen=createStackNavigator({
+  login :App,
+  info :UserDetails
+},
+{
+  headerMode:'screen'
+});
+
+const Appcont=createAppContainer(screen);
+export default Appcont
